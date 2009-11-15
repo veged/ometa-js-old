@@ -167,9 +167,3 @@ String.prototype.toProgramString = function() {
   ws.nextPutAll("\"")
   return ws.contents()
 }
-
-// C-style tempnam function
-
-function tempnam(s) { return (s ? s : "_tmpnam_") + tempnam.n++ }
-tempnam.n = 0
-
