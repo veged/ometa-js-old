@@ -65,9 +65,12 @@ try {
 } catch (f) { alert(f) }
 */
 
-// the failure exception
+(function(exports) {
 
-fail = { toString: function() { return "match failed" } }
+include("./lib");
+
+// the failure exception
+var fail = { toString: function() { return "match failed" } }
 
 // streams and memoization
 
@@ -371,3 +374,6 @@ OMeta = {
   }
 }
 
+exports.OMeta = OMeta;
+
+})(typeof exports === 'undefined' ? this : exports);

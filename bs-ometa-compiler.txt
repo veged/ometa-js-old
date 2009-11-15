@@ -1,3 +1,10 @@
+include("./bs-js-compiler")
+
+exports.OMeta = OMeta;
+exports.Parser = Parser;
+exports.BSJSParser = BSJSParser;
+exports.BSJSTranslator = BSJSTranslator;
+
 ometa BSOMetaParser <: Parser {
   fromTo :x :y   = seq(x) (~seq(y) char)* seq(y), 
   space          = super(#space) | fromTo('//', '\n') | fromTo('/*', '*/'),
@@ -76,7 +83,7 @@ ometa BSOMetaTranslator {
   Rule  :name locals:ls trans:body    -> ['"', name, '":function(){', ls, 'return ', body, '}']         .join(''),
   Grammar :name :sName
           !(self.sName = sName)
-          trans*:rules                -> [name, '=', sName, '.delegated({', rules.join(','), '})']      .join(''),
+          trans*:rules                -> ['var ', name, "=exports.", name,'=', sName, '.delegated({', rules.join(','), '})'].join(''),
   locals  = [string+:vs]              -> ['var ', vs.join(','), ';']                                    .join('')
           | []                        -> '',
   transFn = trans:x                   -> ['(function(){return ', x, '})']                               .join('')

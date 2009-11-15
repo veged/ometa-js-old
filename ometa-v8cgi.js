@@ -1,16 +1,14 @@
-if (!load && include && system.getcwd)
-    var load = global.load = function(f) {
-        var oldLoad = global.load;
-        if (f.indexOf('/') != -1)
-            global.load = function(ff){ return oldLoad(f.replace(/[^\/]+$/, '') + ff) };
-        var result = eval.call(global, new File(system.getcwd() + '/' + f).open("r").read());
-        global.load = oldLoad;
-        return result;
-    };
-if (!print && system.stdout)
-    var print = global.print = function(d) { return system.stdout(d + '\n') };
+(function(exports) {
 
-load('ometa-rhino.js');
+include("./bs-ometa-js-compiler");
 
-exports.translateCode = translateCode;
-exports.ometa = ometa;
+var translateCode = exports.translateCode = function(s) {
+  var fail = { toString: function() { return "match failed" } },
+      translationError = function(m, i) { alert("Translation error - please tell Alex about this!"); throw fail },
+      tree             = BSOMetaJSParser.matchAll(s, "topLevel", undefined, function(m, i) { throw fail.delegated({errorPos: i}) })
+  return BSOMetaJSTranslator.match(tree, "trans", undefined, translationError)
+}
+
+var evalCode = exports.evalCode = function(s) { return eval(translateCode(s)) }
+
+})(typeof exports === 'undefined' ? this : exports);

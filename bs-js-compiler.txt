@@ -1,3 +1,8 @@
+include("./parser")
+
+exports.OMeta = OMeta;
+exports.Parser = Parser;
+
 ometa BSJSParser <: Parser {
   fromTo :x :y = seq(x) (~seq(y) char)* seq(y), 
   space        = super(#space) | fromTo('//', '\n') | fromTo('/*', '*/'),
@@ -181,7 +186,7 @@ ometa BSJSTranslator {
               ( (?(x[x.length - 1] == '}') | end) -> x
               | empty                             -> (x  + ';')
               )
-           )*:xs                                        -> ('{' + xs.join('') + '}'),
+           )*:xs                                        -> ('(function(exports){' + xs.join('') + "})(typeof exports === 'undefined' ? this : exports);"),
   func     :args curlyTrans:body                        -> ('(function (' + args.join(',') + ')' + body + ')'),
   call     trans:fn trans*:args                         -> (fn + '(' + args.join(',') + ')'),
   send     :msg trans:recv trans*:args                  -> (recv + '.' + msg + '(' + args.join(',') + ')'),

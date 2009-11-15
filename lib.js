@@ -23,6 +23,8 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
+(function(exports) {
+
 // try to use StringBuffer instead of string concatenation to improve performance
 
 function StringBuffer() {
@@ -86,7 +88,7 @@ String.prototype.isSpace     = function() { return this.isCharacter() && this.ch
 String.prototype.isDigit     = function() { return this.isCharacter() && this >= "0" && this <= "9" }
 String.prototype.isLower     = function() { return this.isCharacter() && this >= "a" && this <= "z" }
 String.prototype.isUpper     = function() { return this.isCharacter() && this >= "A" && this <= "Z" }
-  
+
 String.prototype.digitValue  = function() { return this.charCodeAt(0) - "0".charCodeAt(0) }
 
 Object.prototype.isSequenceable = false
@@ -167,3 +169,5 @@ String.prototype.toProgramString = function() {
   ws.nextPutAll("\"")
   return ws.contents()
 }
+
+})(typeof exports === 'undefined' ? this : exports);

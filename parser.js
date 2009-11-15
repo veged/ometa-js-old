@@ -23,6 +23,10 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
+(function(exports) {
+
+include("./ometa-base");
+
 Parser = OMeta.delegated({
   listOf: function() {
     var $elf  = this,
@@ -43,5 +47,9 @@ Parser = OMeta.delegated({
     this._apply("spaces")
     return this._applyWithArgs("seq", cs)
   }
-})
+});
 
+exports.OMeta = OMeta;
+exports.Parser = Parser;
+
+})(typeof exports === 'undefined' ? this : exports);
