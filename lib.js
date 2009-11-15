@@ -145,7 +145,8 @@ escapeChar = function(c) {
   return charCode > 255 ? String.fromCharCode(charCode) : escapeStringFor[charCode]
 }
 
-function unescape(s) {
+function unescape() {
+  var s = arguments[0] || this;
   if (s[0] == '\\')
     switch (s[1]) {
       case '\\': return '\\'
@@ -157,6 +158,7 @@ function unescape(s) {
   else
     return s
 }
+String.prototype.unescape= unescape;
 
 String.prototype.toProgramString = function() {
   var ws = "\"".writeStream()
