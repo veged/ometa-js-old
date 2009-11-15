@@ -53,7 +53,16 @@ if (o.get('help')) {
 
     load('ometa-rhino.js');
 
-    var result = translateCode(input) + '\n';
+    try {
+        var result = translateCode(input) + '\n';
+    } catch (e) {
+        if (e.errorPos != undefined) {
+            system.stdout(input.slice(0, e.errorPos));
+            system.stdout(" Parse error ->");
+            system.stdout(input.slice(e.errorPos));
+        }
+        throw e
+    }
 
     if (o.get('output')) {
         (new File(o.get('output'))).open('w').write(result).close();
