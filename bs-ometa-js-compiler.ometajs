@@ -1,4 +1,4 @@
-include("./bs-ometa-optimizer")
+include("./bs-ometa-optimizer.ometajs.js")
 
 exports.OMeta = OMeta;
 exports.Parser = Parser;

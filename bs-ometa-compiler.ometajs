@@ -1,4 +1,4 @@
-include("./bs-js-compiler")
+include("./bs-js-compiler.ometajs.js")
 
 exports.OMeta = OMeta;
 exports.Parser = Parser;
@@ -6,7 +6,7 @@ exports.BSJSParser = BSJSParser;
 exports.BSJSTranslator = BSJSTranslator;
 
 ometa BSOMetaParser <: Parser {
-  fromTo :x :y   = seq(x) (~seq(y) char)* seq(y), 
+  fromTo :x :y   = seq(x) (~seq(y) char)* seq(y),
   space          = super(#space) | fromTo('//', '\n') | fromTo('/*', '*/'),
   nameFirst      = '_' | '$' | letter,
   nameRest       = nameFirst | digit,

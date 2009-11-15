@@ -39,7 +39,7 @@ if (o.get('help')) {
     f.close();
 
     try {
-        var result = require('./ometa-v8cgi').translateCode(input) + '\n';
+        var result = require('./ometajs').translateCode(input) + '\n';
     } catch (e) {
         if (e.errorPos != undefined) {
             system.stdout(input.slice(0, e.errorPos));

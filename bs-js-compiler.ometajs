@@ -4,7 +4,7 @@ exports.OMeta = OMeta;
 exports.Parser = Parser;
 
 ometa BSJSParser <: Parser {
-  fromTo :x :y = seq(x) (~seq(y) char)* seq(y), 
+  fromTo :x :y = seq(x) (~seq(y) char)* seq(y),
   space        = super(#space) | fromTo('//', '\n') | fromTo('/*', '*/'),
   nameFirst    = letter | '$' | '_',
   nameRest     = nameFirst | digit,

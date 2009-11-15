@@ -1,4 +1,4 @@
-include("./bs-ometa-compiler")
+include("./bs-ometa-compiler.ometajs.js")
 
 exports.OMeta = OMeta;
 exports.Parser = Parser;

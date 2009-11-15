@@ -1,6 +1,6 @@
 (function(exports) {
 
-include("./bs-ometa-js-compiler");
+include("./bs-ometa-js-compiler.ometajs.js");
 
 var translateCode = exports.translateCode = function(s) {
   var fail = { toString: function() { return "match failed" } },
