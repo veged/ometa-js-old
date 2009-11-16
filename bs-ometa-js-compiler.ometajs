@@ -14,5 +14,6 @@ ometa BSOMetaJSParser <: BSJSParser {
 }
 
 ometa BSOMetaJSTranslator <: BSJSTranslator {
-  Grammar = foreign(BSOMetaTranslator, #Grammar)
+  Grammar = foreign(BSOMetaTranslator, #Grammar),
+  topLevel = trans:r -> ('(function(exports){' + r + "})(typeof exports === 'undefined' ? this : exports);")
 }
