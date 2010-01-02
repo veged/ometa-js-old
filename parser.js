@@ -25,7 +25,7 @@
 
 (function(exports) {
 
-include("./ometa-base");
+include("./ometa-base.js");
 
 Parser = OMeta.delegated({
   listOf: function() {

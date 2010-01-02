@@ -67,7 +67,7 @@ try {
 
 (function(exports) {
 
-include("./lib");
+include("./lib.js");
 
 // the failure exception
 var fail = { toString: function() { return "match failed" } }
