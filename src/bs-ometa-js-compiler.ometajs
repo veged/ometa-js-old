@@ -1,13 +1,3 @@
-include("./bs-ometa-optimizer.ometajs.js")
-
-exports.OMeta = OMeta;
-exports.Parser = Parser;
-exports.BSJSParser = BSJSParser;
-exports.BSJSTranslator = BSJSTranslator;
-exports.BSOMetaParser = BSOMetaParser;
-exports.BSOMetaTranslator = BSOMetaTranslator;
-exports.BSOMetaOptimizer = BSOMetaOptimizer;
-
 ometa BSOMetaJSParser <: BSJSParser {
   srcElem = spaces foreign(BSOMetaParser, #grammar):r sc -> r
           | super(#srcElem)
@@ -15,5 +5,5 @@ ometa BSOMetaJSParser <: BSJSParser {
 
 ometa BSOMetaJSTranslator <: BSJSTranslator {
   Grammar = foreign(BSOMetaTranslator, #Grammar),
-  topLevel = trans:r -> ('(function(exports){' + r + "})(typeof exports === 'undefined' ? this : exports);")
+  topLevel = trans
 }

@@ -23,8 +23,6 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
-(function(exports) {
-
 // try to use StringBuffer instead of string concatenation to improve performance
 
 function StringBuffer() {
@@ -122,32 +120,22 @@ Array.prototype.delimWith = function(d) {
    [])
 }
 
-// Squeak's ReadStream, kind of
-
-function ReadStream(anArrayOrString) {
-  this.src = anArrayOrString
-  this.pos = 0
-}
-ReadStream.prototype.atEnd = function() { return this.pos >= this.src.length }
-ReadStream.prototype.next  = function() { return this.src.at(this.pos++) }
-
 // escape characters
 
-escapeStringFor = new Object()
-for (var c = 0; c < 256; c++)
-  escapeStringFor[c] = String.fromCharCode(c)
-escapeStringFor["\\".charCodeAt(0)] = "\\\\"
-escapeStringFor['"'.charCodeAt(0)]  = '\\"'
-escapeStringFor["'".charCodeAt(0)]  = "\\'"
-escapeStringFor["\r".charCodeAt(0)] = "\\r"
-escapeStringFor["\n".charCodeAt(0)] = "\\n"
-escapeStringFor["\t".charCodeAt(0)] = "\\t"
-escapeChar = function(c) {
-  var charCode = c.charCodeAt(0)
-  return charCode > 255 ? String.fromCharCode(charCode) : escapeStringFor[charCode]
+escapeStringFor = {};
+for (var c = 0; c < 256; c++) escapeStringFor[c] = String.fromCharCode(c);
+escapeStringFor["\\".charCodeAt(0)] = "\\\\";
+escapeStringFor['"'.charCodeAt(0)]  = '\\"';
+escapeStringFor["'".charCodeAt(0)]  = "\\'";
+escapeStringFor["\r".charCodeAt(0)] = "\\r";
+escapeStringFor["\n".charCodeAt(0)] = "\\n";
+escapeStringFor["\t".charCodeAt(0)] = "\\t";
+function escapeChar(c) {
+  var charCode = c.charCodeAt(0);
+  return charCode > 255 ? String.fromCharCode(charCode) : escapeStringFor[charCode];
 }
 
-function unescape() {
+String.prototype.unescape = function() {
   var s = arguments[0] || this;
   if (s[0] == '\\')
     switch (s[1]) {
@@ -159,8 +147,7 @@ function unescape() {
     }
   else
     return s
-}
-String.prototype.unescape= unescape;
+};
 
 String.prototype.toProgramString = function() {
   var ws = "\"".writeStream()
@@ -168,6 +155,4 @@ String.prototype.toProgramString = function() {
     ws.nextPutAll(escapeChar(this[idx]))
   ws.nextPutAll("\"")
   return ws.contents()
-}
-
-})(typeof exports === 'undefined' ? this : exports);
+};

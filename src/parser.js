@@ -23,11 +23,7 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
-(function(exports) {
-
-include("./ometa-base.js");
-
-Parser = OMeta.delegated({
+var Parser = exports.Parser = OMeta.delegated({
   listOf: function() {
     var $elf  = this,
         rule  = this._apply("anything"),
@@ -49,7 +45,3 @@ Parser = OMeta.delegated({
   }
 });
 
-exports.OMeta = OMeta;
-exports.Parser = Parser;
-
-})(typeof exports === 'undefined' ? this : exports);

@@ -1,12 +1,3 @@
-include("./bs-ometa-compiler.ometajs.js")
-
-exports.OMeta = OMeta;
-exports.Parser = Parser;
-exports.BSJSParser = BSJSParser;
-exports.BSJSTranslator = BSJSTranslator;
-exports.BSOMetaParser = BSOMetaParser;
-exports.BSOMetaTranslator = BSOMetaTranslator;
-
 ometa BSNullOptimization {
   setHelped = !($elf._didSomething = true),
   helped    = ?$elf._didSomething,

@@ -65,10 +65,6 @@ try {
 } catch (f) { alert(f) }
 */
 
-(function(exports) {
-
-include("./lib.js");
-
 // the failure exception
 var fail = { toString: function() { return "match failed" } }
 
@@ -119,7 +115,7 @@ Failer.prototype.used = false
 
 // the OMeta "class" and basic functionality
 
-OMeta = {
+var OMeta = exports.OMeta = {
   _apply: function(rule) {
     var memoRec = this.input.memo[rule]
     if (memoRec == undefined) {
@@ -373,7 +369,3 @@ OMeta = {
     return this._genericMatch(listyObj.toOMInputStream(), rule, args, matchFailed)
   }
 }
-
-exports.OMeta = OMeta;
-
-})(typeof exports === 'undefined' ? this : exports);
