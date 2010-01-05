@@ -1,0 +1,7 @@
+{
+    "name": "ometajs",
+    "author": "Alessandro Warth (http://awarth.blogspot.com/)",
+    "description": "A object-oriented language for pattern matching",
+    "keywords": ["ometa", "parser", "peg"],
+    "version":"0.1.1"
+}
